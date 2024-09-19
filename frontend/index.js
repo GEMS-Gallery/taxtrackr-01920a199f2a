@@ -6,8 +6,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     const taxPayerList = document.getElementById('taxPayerList').getElementsByTagName('tbody')[0];
     const searchResult = document.getElementById('searchResult');
     const updateModal = document.getElementById('updateModal');
+    const addModal = document.getElementById('addModal');
     const updateForm = document.getElementById('updateTaxPayerForm');
-    const closeModal = document.getElementsByClassName('close')[0];
+    const closeButtons = document.getElementsByClassName('close');
+    const openAddModalButton = document.getElementById('openAddModal');
+
+    openAddModalButton.onclick = function() {
+        addModal.style.display = "block";
+    }
 
     addForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -18,6 +24,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         await backend.addTaxPayer(tid, firstName, lastName, address);
         addForm.reset();
+        addModal.style.display = "none";
         await updateTaxPayerList();
     });
 
@@ -48,11 +55,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         await updateTaxPayerList();
     });
 
-    closeModal.onclick = function() {
-        updateModal.style.display = "none";
-    }
+    Array.from(closeButtons).forEach(button => {
+        button.onclick = function() {
+            addModal.style.display = "none";
+            updateModal.style.display = "none";
+        }
+    });
 
     window.onclick = function(event) {
+        if (event.target == addModal) {
+            addModal.style.display = "none";
+        }
         if (event.target == updateModal) {
             updateModal.style.display = "none";
         }

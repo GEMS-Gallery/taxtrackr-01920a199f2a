@@ -14,16 +14,7 @@
         </div>
     </div>
     <div class="container">
-        <div class="form-container">
-            <h2>Add New TaxPayer</h2>
-            <form id="addTaxPayerForm">
-                <input type="text" id="tid" placeholder="TID" required>
-                <input type="text" id="firstName" placeholder="First Name" required>
-                <input type="text" id="lastName" placeholder="Last Name" required>
-                <input type="text" id="address" placeholder="Address" required>
-                <button type="submit">Add TaxPayer</button>
-            </form>
-        </div>
+        <button id="openAddModal" class="btn-primary">Add New TaxPayer</button>
 
         <div class="search-container">
             <h2>Search TaxPayer</h2>
@@ -46,6 +37,20 @@
                 </thead>
                 <tbody></tbody>
             </table>
+        </div>
+    </div>
+
+    <div id="addModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Add New TaxPayer</h2>
+            <form id="addTaxPayerForm">
+                <input type="text" id="tid" placeholder="TID" required>
+                <input type="text" id="firstName" placeholder="First Name" required>
+                <input type="text" id="lastName" placeholder="Last Name" required>
+                <input type="text" id="address" placeholder="Address" required>
+                <button type="submit">Add TaxPayer</button>
+            </form>
         </div>
     </div>
 

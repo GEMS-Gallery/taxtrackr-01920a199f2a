@@ -50,7 +50,7 @@ h1, h2 {
     margin-bottom: 0;
 }
 
-.form-container, .search-container, .list-container {
+.search-container, .list-container {
     background: #fff;
     border-radius: 5px;
     padding: 20px;
@@ -80,6 +80,17 @@ button {
 
 button:hover {
     background-color: #2980b9;
+}
+
+.btn-primary {
+    background-color: #2ecc71;
+    padding: 10px 20px;
+    font-size: 1em;
+    margin-bottom: 20px;
+}
+
+.btn-primary:hover {
+    background-color: #27ae60;
 }
 
 table {
