@@ -7,6 +7,29 @@ body {
     padding: 0;
 }
 
+.hero {
+    background-image: url('https://www.britishresidents.ch/wp-content/uploads/2017/05/Tax.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-content {
+    text-align: center;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.hero h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
 .container {
     width: 80%;
     margin: auto;
@@ -20,9 +43,9 @@ h1, h2 {
 
 .sub-strap {
     font-style: italic;
-    color: #7f8c8d;
-    margin-top: -10px;
-    margin-bottom: 20px;
+    color: #ecf0f1;
+    margin-top: 10px;
+    margin-bottom: 0;
 }
 
 .form-container, .search-container, .list-container {
