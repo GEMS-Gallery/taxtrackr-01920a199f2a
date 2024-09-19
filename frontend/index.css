@@ -18,6 +18,13 @@ h1, h2 {
     color: #2c3e50;
 }
 
+.sub-strap {
+    font-style: italic;
+    color: #7f8c8d;
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+
 .form-container, .search-container, .list-container {
     background: #fff;
     border-radius: 5px;
