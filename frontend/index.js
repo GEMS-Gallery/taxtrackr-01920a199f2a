@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     const searchButton = document.getElementById('searchButton');
     const taxPayerList = document.getElementById('taxPayerList').getElementsByTagName('tbody')[0];
     const searchResult = document.getElementById('searchResult');
+    const updateModal = document.getElementById('updateModal');
+    const updateForm = document.getElementById('updateTaxPayerForm');
+    const closeModal = document.getElementsByClassName('close')[0];
 
     addForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -33,6 +36,28 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
+    updateForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const tid = document.getElementById('updateTid').value;
+        const firstName = document.getElementById('updateFirstName').value;
+        const lastName = document.getElementById('updateLastName').value;
+        const address = document.getElementById('updateAddress').value;
+
+        await backend.updateTaxPayer(tid, firstName, lastName, address);
+        updateModal.style.display = "none";
+        await updateTaxPayerList();
+    });
+
+    closeModal.onclick = function() {
+        updateModal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == updateModal) {
+            updateModal.style.display = "none";
+        }
+    }
+
     async function updateTaxPayerList() {
         const taxPayers = await backend.getAllTaxPayers();
         taxPayerList.innerHTML = '';
@@ -42,7 +67,33 @@ document.addEventListener('DOMContentLoaded', async () => {
             row.insertCell(1).textContent = taxPayer.firstName;
             row.insertCell(2).textContent = taxPayer.lastName;
             row.insertCell(3).textContent = taxPayer.address;
+            
+            const actionsCell = row.insertCell(4);
+            const updateButton = document.createElement('button');
+            updateButton.textContent = 'Update';
+            updateButton.onclick = () => openUpdateModal(taxPayer);
+            actionsCell.appendChild(updateButton);
+
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.onclick = () => deleteTaxPayer(taxPayer.tid);
+            actionsCell.appendChild(deleteButton);
         });
+    }
+
+    function openUpdateModal(taxPayer) {
+        document.getElementById('updateTid').value = taxPayer.tid;
+        document.getElementById('updateFirstName').value = taxPayer.firstName;
+        document.getElementById('updateLastName').value = taxPayer.lastName;
+        document.getElementById('updateAddress').value = taxPayer.address;
+        updateModal.style.display = "block";
+    }
+
+    async function deleteTaxPayer(tid) {
+        if (confirm('Are you sure you want to delete this TaxPayer?')) {
+            await backend.deleteTaxPayer(tid);
+            await updateTaxPayerList();
+        }
     }
 
     await updateTaxPayerList();
